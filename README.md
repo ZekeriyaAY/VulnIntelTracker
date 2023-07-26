@@ -1,6 +1,4 @@
-# VulnIntelTracker
-
-Vulnerability Intelligence Tracker
+# Vulnerability Intelligence Tracker
 
 ## Dev Notes
 
