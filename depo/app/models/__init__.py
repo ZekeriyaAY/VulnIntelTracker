@@ -1,0 +1,1 @@
+from .vuln import Vulnerability
