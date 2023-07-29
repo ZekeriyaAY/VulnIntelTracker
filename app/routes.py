@@ -23,14 +23,14 @@ def login():
         user = User.query.filter_by(
             username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password', 'error')
+            flash('Invalid username or password!', 'error')
             return redirect(url_for('login'))
         login_user(user)  # from flask_login import login_user
         next_page = request.args.get('next')  # from flask import request
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data), 'success')
+        flash('Welcome back, {}! I remember you from somewhere...'.format(
+            user.username), 'success')
         user.last_seen = datetime.utcnow()
         db.session.commit()
         return redirect(next_page)  # from flask import redirect
@@ -42,6 +42,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash('You have been logged out. Now you are alone in the wild...', 'success')
     return redirect(url_for('index'))
 
 
@@ -57,7 +58,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!', 'success')
+        flash('Congratulations! You are now registered to the dark side!', 'success')
         return redirect(url_for('login'))
     return render_template('user/register.html', form=form)
 
