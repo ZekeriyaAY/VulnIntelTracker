@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from .user.login import LoginForm
 from .user.register import RegistrationForm
+from .user.password_change import PasswordChangeForm
 from .user.models import User
 from datetime import datetime
 
@@ -34,7 +35,6 @@ def login():
         user.last_seen = datetime.utcnow()
         db.session.commit()
         return redirect(next_page)  # from flask import redirect
-
     return render_template('user/login.html', form=form)
 
 
@@ -63,9 +63,16 @@ def register():
     return render_template('user/register.html', form=form)
 
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
     user = User.query.filter_by(username=current_user.username).first_or_404()
 
-    return render_template('user/profile.html', user=user)
+    form = PasswordChangeForm()
+    if form.validate_on_submit():
+        user.set_password(form.new_password.data)
+        db.session.commit()
+        flash('Your password has been changed.', 'success')
+        return redirect(url_for('profile'))
+
+    return render_template('user/profile.html', user=user, form=form)
