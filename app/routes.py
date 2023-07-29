@@ -100,7 +100,21 @@ def vulnerability_add():
 
     return render_template('vulnerability/add.html', form=form)
 
+
 @app.route('/vulnerability/list')
 @login_required
 def vulnerability_list():
-    return render_template('vulnerability/list.html')
+    vulnerabilities = Vulnerability.query.all()
+    return render_template('vulnerability/list.html', vulnerabilities=vulnerabilities)
+
+
+@app.route('/vulnerability/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def vulnerability_edit(id):
+    pass
+
+
+@app.route('/vulnerability/delete/<int:id>', methods=['POST'])
+@login_required
+def vulnerability_delete(id):
+    pass
