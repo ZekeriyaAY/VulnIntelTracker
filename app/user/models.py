@@ -12,10 +12,11 @@ def load_user(id):
 class User(UserMixin, db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64), index=True,
+                         unique=True, nullable=False)
     role = db.Column(db.String(64), index=True)
     email = db.Column(
-        db.String(120), index=True, unique=True)
+        db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(128))  # hash: fixed length string
     member_since = db.Column(db.DateTime, default=datetime.utcnow)
     last_seen = db.Column(db.DateTime)

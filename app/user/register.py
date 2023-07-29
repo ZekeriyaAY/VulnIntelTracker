@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, ValidationError, EqualTo, Email
+from wtforms.validators import DataRequired, ValidationError, EqualTo, Email, Length
 from .models import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email Address', validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[
+                           DataRequired(), Length(max=64)])
+    email = StringField('Email Address', validators=[DataRequired(), Email(), Length(max=120)])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Confirm Password',
                               validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
