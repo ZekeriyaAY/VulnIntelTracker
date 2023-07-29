@@ -99,3 +99,8 @@ def vulnerability_add():
         return redirect(url_for('index'))
 
     return render_template('vulnerability/add.html', form=form)
+
+@app.route('/vulnerability/list')
+@login_required
+def vulnerability_list():
+    return render_template('vulnerability/list.html')
