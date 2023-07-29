@@ -6,6 +6,8 @@ from .user.login import LoginForm
 from .user.register import RegistrationForm
 from .user.password_change import PasswordChangeForm
 from .user.models import User
+from .vulnerability.add import VulnerabilityForm
+from .vulnerability.models import Vulnerability
 from datetime import datetime
 
 
@@ -76,3 +78,24 @@ def profile():
         return redirect(url_for('profile'))
 
     return render_template('user/profile.html', user=user, form=form)
+
+
+@app.route('/vulnerability/add', methods=['GET', 'POST'])
+@login_required
+def vulnerability_add():
+    form = VulnerabilityForm()
+    if form.validate_on_submit():
+        vulnerability = Vulnerability(
+            cve=form.cve.data,
+            cvss=form.cvss.data,
+            name=form.name.data,
+            description=form.description.data,
+            exploit_available=form.exploit_available.data
+        )
+        db.session.add(vulnerability)
+        db.session.commit()
+        flash('Your vulnerability({}) has been added.'.format(
+            form.cve.data), 'success')
+        return redirect(url_for('index'))
+
+    return render_template('vulnerability/add.html', form=form)

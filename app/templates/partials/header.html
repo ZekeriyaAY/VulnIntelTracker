@@ -13,6 +13,10 @@
                     <a class="nav-link {{ 'active' if request.path == url_for('index') else '' }}" aria-current="page"
                         href="{{ url_for('index') }}">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ 'active' if request.path == url_for('vulnerability_add') else '' }}"
+                        aria-current="page" href="{{ url_for('vulnerability_add') }}">Vulnerability Add</a>
+                </li>
                 {% endif %}
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0 mx-4">
@@ -31,8 +35,9 @@
                         href="{{ url_for('login') }}"><i class="bi-door-open-fill"></i> Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ 'active' if request.path == url_for('register') else '' }}" aria-current="page"
-                        href="{{ url_for('register') }}"><i class="bi-door-open-fill"></i> Register</a>
+                    <a class="nav-link {{ 'active' if request.path == url_for('register') else '' }}"
+                        aria-current="page" href="{{ url_for('register') }}"><i class="bi-door-open-fill"></i>
+                        Register</a>
                 </li>
                 {% endif %}
             </ul>
