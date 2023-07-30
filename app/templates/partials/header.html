@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary px-3" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('index') }}">VulnIntelTracker</a>
+        <a class="navbar-brand" href="{{ url_for('main.index') }}">VulnIntelTracker</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,18 +10,19 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link {{ 'active' if request.path == url_for('index') else '' }}" aria-current="page"
-                        href="{{ url_for('index') }}">Home</a>
+                    <a class="nav-link {{ 'active' if request.path == url_for('main.index') else '' }}" aria-current="page"
+                        href="{{ url_for('main.index') }}">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ 'active' if request.path == url_for('vulnerability_add') or request.path == url_for('vulnerability_list') else '' }}"
+                    <a class="nav-link dropdown-toggle {{ 'active' if request.path == url_for('vulnerability.vulnerability_add') or request.path == url_for('vulnerability.vulnerability_list') else '' }}"
                         href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Vulnerability
                     </a>
                     <ul class="dropdown-menu">
                         <li class="nav-item">
-                            <a class="dropdown-item {{ 'active' if request.path == url_for('vulnerability_list') else '' }}"
-                                aria-current="page" href="{{ url_for('vulnerability_list') }}">List Vulnerability</a>
+                            <a class="dropdown-item {{ 'active' if request.path == url_for('vulnerability.vulnerability_list') else '' }}"
+                                aria-current="page" href="{{ url_for('vulnerability.vulnerability_list') }}">List
+                                Vulnerability</a>
                         </li>
                         <li class="nav-item">
                             <a class="dropdown-item" href="#addVulnModal" data-bs-toggle="modal"
@@ -29,8 +30,9 @@
                                 Vulnerability</a>
                         </li>
                         <li class="nav-item">
-                            <a class="dropdown-item {{ 'active' if request.path == url_for('vulnerability_add') else '' }}"
-                                aria-current="page" href="{{ url_for('vulnerability_add') }}">Vulnerability Add</a>
+                            <a class="dropdown-item {{ 'active' if request.path == url_for('vulnerability.vulnerability_add') else '' }}"
+                                aria-current="page"
+                                href="{{ url_for('vulnerability.vulnerability_add') }}">Vulnerability Add</a>
                         </li>
                     </ul>
                 </li>
@@ -39,21 +41,23 @@
             <ul class="navbar-nav mb-2 mb-lg-0 mx-4">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link {{ 'active' if request.path == url_for('profile') else '' }}" aria-current="page"
-                        href="{{ url_for('profile') }}"><i class="bi-person-lines-fill"></i> Profile</a>
+                    <a class="nav-link {{ 'active' if request.path == url_for('user.profile') else '' }}"
+                        aria-current="page" href="{{ url_for('user.profile') }}"><i class="bi-person-lines-fill"></i>
+                        Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}"><i
+                    <a class="nav-link" aria-current="page" href="{{ url_for('user.logout') }}"><i
                             class="bi-door-closed-fill"></i> Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link {{ 'active' if request.path == url_for('login') else '' }}" aria-current="page"
-                        href="{{ url_for('login') }}"><i class="bi-door-open-fill"></i> Login</a>
+                    <a class="nav-link {{ 'active' if request.path == url_for('user.login') else '' }}"
+                        aria-current="page" href="{{ url_for('user.login') }}"><i class="bi-door-open-fill"></i>
+                        Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ 'active' if request.path == url_for('register') else '' }}"
-                        aria-current="page" href="{{ url_for('register') }}"><i class="bi-door-open-fill"></i>
+                    <a class="nav-link {{ 'active' if request.path == url_for('user.register') else '' }}"
+                        aria-current="page" href="{{ url_for('user.register') }}"><i class="bi-door-open-fill"></i>
                         Register</a>
                 </li>
                 {% endif %}
