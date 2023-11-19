@@ -1,0 +1,58 @@
+{% with errors = get_flashed_messages(category_filter=["error"]) %}
+{% if errors %}
+{% for error in errors %}
+<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" id="alert">
+    <i class="bi bi-bug-fill flex-shrink-0 me-2"></i>
+    <div>
+        {{ error }}
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+{% with warnings = get_flashed_messages(category_filter=["warning"]) %}
+{% if warnings %}
+{% for warning in warnings %}
+<div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert" id="alert">
+    <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+    <div>
+        {{ warning }}
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+{% with successes = get_flashed_messages(category_filter=["success"]) %}
+{% if successes %}
+{% for success in successes %}
+<div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert" id="alert">
+    <i class="bi bi-patch-check-fill flex-shrink-0 me-2"></i>
+    <div>
+        {{ success }}
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+{% with infos = get_flashed_messages(category_filter=["info"]) %}
+{% if infos %}
+{% for info in infos %}
+<div class="alert alert-info alert-dismissible fade show d-flex align-items-center" role="alert" id="alert">
+    <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
+    <div>
+        {{ info }}
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}

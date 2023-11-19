@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center mb-4">Profile</h1>
+
+<p>Username: {{ user.username }}</p>
+
+{% if user.last_seen %}
+<p>Last seen on: {{ user.last_seen }}</p>
+<p> {{ moment(user.last_seen).fromNow() }} </p>
+{% endif %}
+
+{% if user.member_since %}
+<p>Member since: {{ user.member_since }}</p>
+{% endif %}
+
+{% if user.last_password_change %}
+<p>Last password change: {{ user.last_password_change }}</p>
+<p> {{ moment(user.last_password_change).fromNow() }} </p>
+{% endif %}
+
+
+{% include 'user/password_change.html' %}
+
+{% endblock %}
