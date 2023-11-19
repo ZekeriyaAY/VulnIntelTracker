@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager
 from flask_moment import Moment
 from config import Config
 import logging
@@ -12,8 +11,6 @@ import os
 db = SQLAlchemy()
 migrate = Migrate()
 moment = Moment()
-login = LoginManager()
-login.login_view = 'user.login'  # redirect to login page if not logged in
 
 
 def create_app(config_class=Config):
@@ -23,15 +20,12 @@ def create_app(config_class=Config):
     db.init_app(app)  # initialize database
     migrate.init_app(app, db)  # initialize migration engine
     moment.init_app(app)  # initialize moment.js
-    login.init_app(app)  # initialize login manager
 
     from .main import bp as main_bp
     from .errors import bp as errors_bp
-    from .user import bp as user_bp
     from .vulnerability import bp as vulnerability_bp
     app.register_blueprint(main_bp)
     app.register_blueprint(errors_bp)
-    app.register_blueprint(user_bp)
     app.register_blueprint(vulnerability_bp)
 
     if not app.debug and not app.testing:
